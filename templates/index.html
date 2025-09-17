@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Joke of the Day</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    </head>
+    <body>
+            <main class="container">
+                <h1 class="title">Joke of the Day <span class="emoji" aria-hidden="true">😂</span></h1>
+            <p class="subtitle">Need a chuckle? Tap the button and enjoy!</p>
+
+            <section class="card">
+                <button id="getJokeBtn" class="btn">Get a Joke</button>
+                <div id="jokeDisplay" class="display" aria-live="polite"></div>
+            </section>
+            <p class="credit">Brought to you by <span><a href="https://github.com/christliebdela">Chris</a></span> & Global Code 2025</p>
+        </main>
+
+        <script>
+            async function fetchData(url, displayElementId) {
+                const displayElement = document.getElementById(displayElementId);
+                displayElement.textContent = 'Loading…';
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    displayElement.innerHTML = '';
+                    if (data.error) {
+                        const p = document.createElement('p');
+                        p.className = 'error';
+                        p.textContent = `Oops: ${data.error}`;
+                        displayElement.appendChild(p);
+                        return;
+                    }
+
+                    const p = document.createElement('p');
+                    p.className = 'joke';
+                    p.textContent = data.joke ?? 'No joke available right now.';
+                    displayElement.appendChild(p);
+                } catch (err) {
+                    displayElement.innerHTML = '';
+                    const p = document.createElement('p');
+                    p.className = 'error';
+                    p.textContent = `Network error: ${err.message}`;
+                    displayElement.appendChild(p);
+                }
+            }
+
+            document.getElementById('getJokeBtn').addEventListener('click', () => {
+                fetchData('/get_joke', 'jokeDisplay');
+            });
+        </script>
+    </body>
+</html>

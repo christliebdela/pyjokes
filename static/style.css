@@ -1,0 +1,133 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+
+:root {
+	--bg: #0f1020;
+	--card: #191a2e;
+	--text: #e8ecf1;
+	--muted: #aab3c0;
+	--accent: #ffcc00; 
+	--accent-2: #ff6b6b; 
+	--accent-3: #4dd0e1;
+	--shadow: rgba(0, 0, 0, 0.3);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: radial-gradient(1200px 700px at 10% 10%, #1b1c34, var(--bg)) fixed;
+	color: var(--text);
+	font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Comic Neue', sans-serif;
+	display: grid;
+	place-items: center;
+}
+
+.container {
+	width: 100%;
+	max-width: 720px;
+	padding: 2rem;
+	text-align: center;
+}
+
+.title {
+	font-family: 'Comic Neue', cursive;
+	font-size: clamp(1.8rem, 4vw, 3rem);
+	line-height: 1.1;
+	margin: 0 0 0.25rem;
+	text-shadow: 0 6px 18px var(--shadow);
+}
+
+.title .emoji {
+	display: inline-block;
+	transform: translateY(2px);
+	filter: drop-shadow(0 2px 4px var(--shadow));
+}
+
+.subtitle {
+	margin: 0 0 1.25rem;
+	color: var(--muted);
+}
+
+.card {
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 16px;
+	padding: 1.5rem;
+	box-shadow: 0 10px 30px var(--shadow);
+	backdrop-filter: blur(6px);
+}
+
+.credit {
+	font-size: 15px;
+	color: var(--muted);
+}
+
+.credit a {
+	text-decoration: none;
+	color: var(--accent-3);
+	font-style: italic;
+}
+
+.btn {
+	appearance: none;
+	border: none;
+	background: var(--accent-3);
+	color: #101114;
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	padding: 0.85rem 1.1rem;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: transform 120ms ease, box-shadow 200ms ease, filter 200ms ease;
+	box-shadow: 0 6px 14px rgba(255, 204, 0, 0.22);
+}
+
+.btn:hover {
+	transform: translateY(-1px) scale(1.01);
+	filter: brightness(1.02);
+}
+
+.btn:active {
+	transform: translateY(1px) scale(0.98);
+}
+
+.display {
+	min-height: 80px;
+	margin-top: 1rem;
+	padding: 1rem;
+	border-radius: 12px;
+	border: 1px dashed rgba(255, 255, 255, 0.15);
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.joke {
+	font-family: 'Comic Neue', cursive;
+	font-size: clamp(1rem, 2.5vw, 1.35rem);
+	line-height: 1.5;
+	animation: giggle 260ms ease-in-out 2;
+}
+
+.error {
+	color: var(--accent-2);
+	font-weight: 600;
+}
+
+@keyframes giggle {
+	0% { transform: rotate(0deg); }
+	25% { transform: rotate(1.2deg); }
+	50% { transform: rotate(-1.2deg); }
+	75% { transform: rotate(0.6deg); }
+	100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 480px) {
+	.container { padding: 1.25rem; }
+	.card { padding: 1rem; }
+}
